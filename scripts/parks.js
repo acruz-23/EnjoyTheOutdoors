@@ -1,8 +1,11 @@
 console.log("Parks JS working");
-
+const parksTableEl = document.getElementById("parksTable");
+parksTableEl.style.display = "none";
 const locationDropdownEl = document.getElementById("locationDropdown");
 const parkTypeDropdownEl = document.getElementById("parkTypeDropdown");
 const tableBody = document.querySelector("tbody");
+const viewAllCheckEl = document.getElementById("viewAllCheck");
+
 populateDropdown(parkTypesArray.sort(), parkTypeDropdownEl);
 populateDropdown(locationsArray, locationDropdownEl);
 
@@ -13,7 +16,7 @@ locationDropdownEl.addEventListener("change", () => {
     selectedLocation,
     "State"
   );
-  tableBody.innerHTML = "";
+  formReset(parksTableEl, tableBody, selectedLocation);
   locationMatches.forEach((park) => generateTableRow(tableBody, park));
 });
 
@@ -24,8 +27,20 @@ parkTypeDropdownEl.addEventListener("change", () => {
     selectedType,
     "LocationName"
   );
-  tableBody.innerHTML = "";
+  formReset(parksTableEl, tableBody, selectedType);
   typeMatches.forEach((park) => generateTableRow(tableBody, park));
+});
+
+viewAllCheckEl.addEventListener("change", () => {
+  console.log("checked");
+  if (viewAllCheckEl.checked) {
+    locationDropdownEl.value = "choose";
+    parkTypeDropdownEl.value = "choose";
+    formReset(parksTableEl, tableBody);
+    nationalParksArray.forEach((park) => generateTableRow(tableBody, park));
+  } else {
+    formReset(parksTableEl, tableBody, "choose");
+  }
 });
 
 function populateDropdown(data, dropdownEl) {
@@ -61,6 +76,7 @@ function generateTableRow(myTable, object) {
   const nameCell = row.insertCell();
   const addressCell = row.insertCell();
   const contactCell = row.insertCell();
+  const urlCell = row.insertCell();
 
   nameCell.textContent = object.LocationName;
   if (object.Address === 0) {
@@ -78,5 +94,23 @@ ${object.City}, ${object.State} ${object.ZipCode}`;
   } else {
     contactCell.textContent = `Phone Number: ${object.Phone}
 Fax: ${object.Fax}`;
+  }
+  if (object.Visit !== undefined) {
+    const anchor = document.createElement("a");
+    anchor.href = object.Visit;
+    anchor.innerText = object.Visit;
+    anchor.target = "_blank";
+    anchor.alt = object.LocationName + "link.";
+    urlCell.appendChild(anchor);
+  } else {
+    urlCell.textContent = "N/A";
+  }
+}
+function formReset(table, tBody, selectedValue) {
+  tBody.innerHTML = "";
+  if (selectedValue === "choose") {
+    table.style.display = "none";
+  } else {
+    table.style.display = "table-header-group";
   }
 }
