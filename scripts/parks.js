@@ -7,13 +7,25 @@ populateDropdown(parkTypesArray.sort(), parkTypeDropdownEl);
 populateDropdown(locationsArray, locationDropdownEl);
 
 locationDropdownEl.addEventListener("change", () => {
-  const matches = matchArrayObjects(
+  const selectedLocation = locationDropdownEl.value;
+  const locationMatches = matchArrayObjects(
     nationalParksArray,
-    locationDropdownEl,
+    selectedLocation,
     "State"
   );
   tableBody.innerHTML = "";
-  matches.forEach((park) => generateTableRow(tableBody, park));
+  locationMatches.forEach((park) => generateTableRow(tableBody, park));
+});
+
+parkTypeDropdownEl.addEventListener("change", () => {
+  const selectedType = parkTypeDropdownEl.value;
+  const typeMatches = findInArrayObjects(
+    nationalParksArray,
+    selectedType,
+    "LocationName"
+  );
+  tableBody.innerHTML = "";
+  typeMatches.forEach((park) => generateTableRow(tableBody, park));
 });
 
 function populateDropdown(data, dropdownEl) {
@@ -24,10 +36,18 @@ function populateDropdown(data, dropdownEl) {
   });
 }
 
-function matchArrayObjects(data, dropdownEl, parameter) {
+function matchArrayObjects(data, selectedValue, property) {
   console.log("matchArrayObjects working");
-  const selectedValue = dropdownEl.value;
-  const match = data.filter((object) => selectedValue === object[parameter]);
+
+  const match = data.filter((object) => selectedValue === object[property]);
+  console.log(match);
+  return match;
+}
+function findInArrayObjects(data, selectedValue, property) {
+  console.log("findInArrayObjects start");
+  const match = data.filter((object) =>
+    object[property].includes(selectedValue)
+  );
   console.log(match);
   return match;
 }
