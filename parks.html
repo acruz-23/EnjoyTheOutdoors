@@ -47,18 +47,16 @@
         <div class="row">
           <div class="col-md-4">
             <label for="locationDropdown" class="form-label"
-              >Search by State:</label
+              >Filter by State:</label
             >
             <select id="locationDropdown" class="form-select">
               <option value="choose">Choose one..</option>
             </select>
           </div>
-          <div class="col-md-3 mt-2">
-            <h5>Or...</h5>
-          </div>
+
           <div class="col-md-4">
             <label for="parkTypeDropdown" class="form-label" disabled
-              >Search by Park Type:</label
+              >Filter by Park Type:</label
             >
             <select id="parkTypeDropdown" class="form-select">
               <option value="choose">Choose one..</option>
@@ -82,13 +80,13 @@
         </div>
         <div class="row">
           <div class="col-12">
+            <h3 id="searchMessageEl"></h3>
             <table class="table table-striped" id="parksTable">
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Address</th>
                   <th>Contact</th>
-                  <th>Website</th>
                 </tr>
               </thead>
               <tbody></tbody>

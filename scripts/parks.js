@@ -1,50 +1,79 @@
-console.log("Parks JS working");
 const parksTableEl = document.getElementById("parksTable");
 parksTableEl.style.display = "none";
 const locationDropdownEl = document.getElementById("locationDropdown");
 const parkTypeDropdownEl = document.getElementById("parkTypeDropdown");
 const tableBody = document.querySelector("tbody");
 const viewAllCheckEl = document.getElementById("viewAllCheck");
+const searchMessageEl = document.getElementById("searchMessageEl");
+let commonMatches = [];
+let locationMatches = [];
+let typeMatches = [];
 
 populateDropdown(parkTypesArray.sort(), parkTypeDropdownEl);
 populateDropdown(locationsArray, locationDropdownEl);
 
 locationDropdownEl.addEventListener("change", () => {
   const selectedLocation = locationDropdownEl.value;
-  const locationMatches = matchArrayObjects(
+  formReset(parksTableEl, tableBody, selectedLocation, typeMatches, false);
+  locationMatches = matchArrayObjects(
     nationalParksArray,
     selectedLocation,
     "State"
   );
-  formReset(parksTableEl, tableBody, selectedLocation);
-  locationMatches.forEach((park) => generateTableRow(tableBody, park));
+  if (typeMatches.length !== 0 && selectedLocation !== "choose") {
+    commonMatches = locationMatches.filter((parkLoc) =>
+      typeMatches.includes(parkLoc)
+    );
+    commonMatches.forEach((park) => generateTableRow(tableBody, park));
+    if (commonMatches.length === 0) {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    }
+  } else if (selectedLocation === "choose") {
+    typeMatches.forEach((park) => generateTableRow(tableBody, park));
+  } else {
+    locationMatches.forEach((park) => generateTableRow(tableBody, park));
+  }
 });
 
 parkTypeDropdownEl.addEventListener("change", () => {
   const selectedType = parkTypeDropdownEl.value;
-  const typeMatches = findInArrayObjects(
+  formReset(parksTableEl, tableBody, selectedType, locationMatches, false);
+  typeMatches = findInArrayObjects(
     nationalParksArray,
     selectedType,
     "LocationName"
   );
-  formReset(parksTableEl, tableBody, selectedType);
-  typeMatches.forEach((park) => generateTableRow(tableBody, park));
+  if (locationMatches.length !== 0 && selectedType !== "choose") {
+    commonMatches = typeMatches.filter((parkType) =>
+      locationMatches.includes(parkType)
+    );
+    commonMatches.forEach((park) => generateTableRow(tableBody, park));
+    if (commonMatches.length === 0) {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    }
+  } else if (selectedType === "choose") {
+    locationMatches.forEach((park) => generateTableRow(tableBody, park));
+  } else {
+    typeMatches.forEach((park) => generateTableRow(tableBody, park));
+  }
 });
 
 viewAllCheckEl.addEventListener("change", () => {
-  console.log("checked");
   if (viewAllCheckEl.checked) {
     locationDropdownEl.value = "choose";
     parkTypeDropdownEl.value = "choose";
     formReset(parksTableEl, tableBody);
     nationalParksArray.forEach((park) => generateTableRow(tableBody, park));
   } else {
-    formReset(parksTableEl, tableBody, "choose");
+    typeMatches = [];
+    locationMatches = [];
+    formReset(parksTableEl, tableBody, "choose", commonMatches);
   }
 });
 
 function populateDropdown(data, dropdownEl) {
-  console.log("populateDropdown working");
   data.forEach((entry) => {
     const dropdownOptions = new Option(entry);
     dropdownEl.appendChild(dropdownOptions);
@@ -52,31 +81,25 @@ function populateDropdown(data, dropdownEl) {
 }
 
 function matchArrayObjects(data, selectedValue, property) {
-  console.log("matchArrayObjects working");
-
   const match = data.filter((object) => selectedValue === object[property]);
-  console.log(match);
+
   return match;
 }
 function findInArrayObjects(data, selectedValue, property) {
-  console.log("findInArrayObjects start");
   const match = data.filter((object) =>
     object[property].includes(selectedValue)
   );
-  console.log(match);
+
   return match;
 }
 
 function generateTableRow(myTable, object) {
-  console.log("generateTableRow working");
-
   const row = myTable.insertRow();
-  console.log(row);
 
   const nameCell = row.insertCell();
   const addressCell = row.insertCell();
   const contactCell = row.insertCell();
-  const urlCell = row.insertCell();
+  // const urlCell = row.insertCell();
 
   nameCell.textContent = object.LocationName;
   if (object.Address === 0) {
@@ -93,22 +116,28 @@ ${object.City}, ${object.State} ${object.ZipCode}`;
     contactCell.textContent = `Phone Number: ${object.Phone}`;
   } else {
     contactCell.textContent = `Phone Number: ${object.Phone}
-Fax: ${object.Fax}`;
+Fax: ${object.Fax}
+`;
   }
   if (object.Visit !== undefined) {
+    const paragraph = document.createElement("p");
     const anchor = document.createElement("a");
     anchor.href = object.Visit;
     anchor.innerText = object.Visit;
     anchor.target = "_blank";
     anchor.alt = object.LocationName + "link.";
-    urlCell.appendChild(anchor);
-  } else {
-    urlCell.textContent = "N/A";
+    paragraph.appendChild(anchor);
+    contactCell.appendChild(paragraph);
   }
 }
-function formReset(table, tBody, selectedValue) {
+function formReset(table, tBody, selectedValue, matchingArray, checkBoolean) {
+  if (checkBoolean === false) {
+    viewAllCheckEl.checked = false;
+  }
+  searchMessageEl.textContent = null;
+  commonMatches = [];
   tBody.innerHTML = "";
-  if (selectedValue === "choose") {
+  if (selectedValue === "choose" && matchingArray.length === 0) {
     table.style.display = "none";
   } else {
     table.style.display = "table-header-group";
