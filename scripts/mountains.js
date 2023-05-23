@@ -1,5 +1,3 @@
-console.log("Mountain js working");
-
 const mountainDropdownEl = document.getElementById("mountainDropdown");
 const tableBody = document.querySelector("tbody");
 const mountainImgEl = document.getElementById("mountainImg");
@@ -18,7 +16,6 @@ mountainDropdownEl.addEventListener("change", () => {
   );
 });
 function populateDropdown(data, dropdownEl, property) {
-  console.log("populateDropdown working");
   data.forEach((entry) => {
     const dropdownOptions = new Option(entry[property]);
     dropdownEl.appendChild(dropdownOptions);
@@ -26,16 +23,11 @@ function populateDropdown(data, dropdownEl, property) {
 }
 
 function matchArrayObjects(data, selectedValue, property) {
-  console.log("matchArrayObjects working");
-
   const match = data.filter((object) => selectedValue === object[property]);
-  console.log(match);
   return match;
 }
 
 function generateMountainInfo(myTable, object, imgEl) {
-  console.log(object);
-
   const row1 = myTable.insertRow();
   const nameHeading = row1.insertCell();
   const nameCell = row1.insertCell();
@@ -60,11 +52,35 @@ function generateMountainInfo(myTable, object, imgEl) {
   descHeading.outerHTML = "<th>Description: </th>";
   descCell.textContent = object.desc;
 
+  const row5 = myTable.insertRow();
+  const sunriseHeading = row5.insertCell();
+  const sunriseCell = row5.insertCell();
+  sunriseHeading.outerHTML = "<th>Sunrise (UTC):</th>";
+
+  const row6 = myTable.insertRow();
+  const sunsetHeading = row6.insertCell();
+  const sunsetCell = row6.insertCell();
+  sunsetHeading.outerHTML = "<th>Sunset (UTC):</th>";
   imgEl.src = "./images/" + object.img;
+  getSunsetForMountain(
+    object.coords.lat,
+    object.coords.lng,
+    sunsetCell,
+    sunriseCell
+  );
 }
 
 function clearPage(table, imgEl) {
   table.innerHTML = "";
   imgEl.src = "";
   imgEl.alt = "";
+}
+
+async function getSunsetForMountain(lat, lng, sunsetEl, sunriseEl) {
+  let response = await fetch(
+    `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=today`
+  );
+  let data = await response.json();
+  sunsetEl.textContent = data.results.sunset;
+  sunriseEl.textContent = data.results.sunrise;
 }
