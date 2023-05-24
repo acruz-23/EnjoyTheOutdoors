@@ -81,19 +81,21 @@ function populateDropdown(data, dropdownEl) {
 }
 
 function matchArrayObjects(data, selectedValue, property) {
-  const match = data.filter((object) => selectedValue === object[property]);
+  const match = data.filter(
+    (object) => selectedValue.toUpperCase() === object[property].toUpperCase()
+  );
 
   return match;
 }
 function findInArrayObjects(data, selectedValue, property) {
   const match = data.filter((object) =>
-    object[property].includes(selectedValue)
+    object[property].toUpperCase().includes(selectedValue.toUpperCase())
   );
 
   return match;
 }
 
-function generateTableRow(myTable, object) {
+function generateTableRow(myTable, obj) {
   const row = myTable.insertRow();
 
   const nameCell = row.insertCell();
@@ -101,31 +103,31 @@ function generateTableRow(myTable, object) {
   const contactCell = row.insertCell();
   // const urlCell = row.insertCell();
 
-  nameCell.textContent = object.LocationName;
-  if (object.Address === 0) {
-    addressCell.textContent = `${object.City}, ${object.State}`;
+  nameCell.textContent = obj.LocationName;
+  if (obj.Address === 0) {
+    addressCell.textContent = `${obj.City}, ${obj.State}`;
   } else {
-    addressCell.textContent = `${object.Address}
-${object.City}, ${object.State} ${object.ZipCode}`;
+    addressCell.textContent = `${obj.Address}
+${obj.City}, ${obj.State} ${obj.ZipCode}`;
   }
-  if (object.Phone === 0 && object.Fax === 0) {
+  if (obj.Phone === 0 && obj.Fax === 0) {
     contactCell.textContent = "N/A";
-  } else if (object.Phone === 0) {
-    contactCell.textContent = `Fax: ${object.Fax}`;
-  } else if (object.Fax === 0) {
-    contactCell.textContent = `Phone Number: ${object.Phone}`;
+  } else if (obj.Phone === 0) {
+    contactCell.textContent = `Fax: ${obj.Fax}`;
+  } else if (obj.Fax === 0) {
+    contactCell.textContent = `Phone Number: ${obj.Phone}`;
   } else {
-    contactCell.textContent = `Phone Number: ${object.Phone}
-Fax: ${object.Fax}
+    contactCell.textContent = `Phone Number: ${obj.Phone}
+Fax: ${obj.Fax}
 `;
   }
-  if (object.Visit !== undefined) {
+  if (obj.Visit !== undefined) {
     const paragraph = document.createElement("p");
     const anchor = document.createElement("a");
-    anchor.href = object.Visit;
-    anchor.innerText = object.Visit;
+    anchor.href = obj.Visit;
+    anchor.innerText = obj.Visit;
     anchor.target = "_blank";
-    anchor.alt = object.LocationName + "link.";
+    anchor.alt = obj.LocationName + "link.";
     paragraph.appendChild(anchor);
     contactCell.appendChild(paragraph);
   }
