@@ -38,7 +38,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link selected" href="./mountains.html"
-                  >Mountain Search</a
+                  >Mountain Viewer</a
                 >
               </li>
             </ul>
@@ -50,41 +50,43 @@
       <div class="card banner" id="smallBanner">
         <img
           class="card-img"
-          src="./images/parksBannerResize.jpg"
+          src="./images/mountainBannerResizeSm.jpg"
           alt="Park in California."
         />
       </div>
       <div class="card banner" id="largeBanner">
         <img
           class="card-img"
-          src="./images/parksBannerResized.jpg"
+          src="./images/mountainBannerResizedLrg.jpg"
           alt="Park in California."
         />
       </div>
       <div class="container-fluid">
-        <div class="row">
-          <h1>Mountain Viewer</h1>
-          <div class="col-md-6">
-            <label for="mountainDropdown" class="form-label"
-              >Mountain Name:</label
-            >
-            <select id="mountainDropdown" class="form-select">
-              <option value="">Choose one..</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12" id="tableColumn">
-            <table class="table" id="mountainTable">
-              <tbody></tbody>
-            </table>
-          </div>
-          <div class="col-md-6">
-            <div class="card bg-light">
-              <img src="" class="card-img" alt="" id="mountainImg" />
+        <form>
+          <div class="row">
+            <h1>Mountain Viewer</h1>
+            <div class="col-md-6">
+              <label for="mountainDropdown" class="form-label"
+                >Mountain Name:</label
+              >
+              <select id="mountainDropdown" class="form-select">
+                <option value="">Choose one..</option>
+              </select>
             </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="col-md-6" id="tableColumn">
+              <table class="table" id="mountainTable">
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <div class="card bg-light">
+                <img src="" class="card-img" alt="" id="mountainImg" />
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </main>
     <footer class="mt-4 mx-3">
