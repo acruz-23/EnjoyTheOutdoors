@@ -49,14 +49,9 @@ changeAnimalBtnEl.addEventListener("click", () =>
 
 function populateCard(cardEl, imgArray) {
   const imgEL = cardEl.querySelector("img");
-  console.log(imgEL);
-  const randInt = randIntFromInterval(0, imgArray.length - 1);
+  const randInt = Math.floor(Math.random() * imgArray.length);
   imgEL.src = imageFiles[randInt].url + "?random=" + counter;
   imgEL.alt = imageFiles[randInt].description;
   counter++;
   console.log(randInt);
-}
-
-function randIntFromInterval(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
 }
