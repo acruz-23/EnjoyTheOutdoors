@@ -37,6 +37,10 @@ locationDropdownEl.addEventListener("change", () => {
     }
     commonMatches.forEach((park) => generateTableRow(tableBody, park));
   } else if (selectedLocation === "choose") {
+    if (typeMatches.length === "0") {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    }
     typeMatches.forEach((park) => generateTableRow(tableBody, park));
   } else {
     locationMatches.forEach((park) => generateTableRow(tableBody, park));
@@ -66,6 +70,10 @@ parkTypeDropdownEl.addEventListener("change", () => {
       searchMessageEl.textContent = "No Matches Found";
     }
   } else if (selectedType === "choose") {
+    if (locationMatches.length === "0") {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    }
     locationMatches.forEach((park) => generateTableRow(tableBody, park));
   } else {
     typeMatches.forEach((park) => generateTableRow(tableBody, park));
