@@ -3,6 +3,12 @@ body{
     background-color:#f8eee1;
     
 }
+#homeBanner {
+    margin-bottom: 2em;
+}
+.card {
+    margin-bottom: 1em;
+}
 a.btn {
     background-color: transparent;
     color: white;
@@ -10,8 +16,8 @@ a.btn {
     font-weight: bold;
 }
 a.btn:hover {
-text-decoration: underline;
-border: thick solid white;
+    text-decoration: underline;
+    border: thick solid white;
 }
 #changeAnimalBtn:hover {
     color:white;
@@ -49,7 +55,8 @@ border: thick solid white;
     
 }
 .animalPicTitle{
-    padding:1.5em
+    padding:1.5em;
+    margin-bottom: 2em;
 }
 .animalPicTitle span{
     color:white;
@@ -65,6 +72,8 @@ border: thick solid white;
 
  #carousel{
     width: 100%;
+    margin: 0 0 2em 0;
+    padding:0;
  }
 .carousel-item {
     max-height: 90vh;
@@ -103,11 +112,7 @@ div.buttonContainer a{
     margin-right: 1.5em;
     width:19%
 }
- .homeContainer, form{
-    padding-left: 2.8em;
-    padding-right: 2.8em;
-    
-}
+  
  .container-fluid .banner{
     padding-left: 0;
     padding-right: 0;
@@ -160,6 +165,34 @@ footer {
     display:flex;
     flex-direction: column;
 }
+#searchMessageEl{
+    margin-top: 1em;
+}
+#scrollBtn{
+    display:none;
+    position:fixed;
+    right:2%;
+    bottom:3%;
+    font-weight: bold;
+    font-size: 1.3em;
+    border-color: black;
+}
+#scrollBtn:hover{
+    border-width: thick;
+    text-decoration: underline;
+}
+@media screen and (max-width:1200px){
+    form{
+        padding-left: 2.8em;
+        padding-right: 2.8em;
+        
+    }
+    
+    .animalImgGroups{
+        padding:0 1em 1em 1em ;
+    }
+}
+
 @media screen and (max-width:950px){
     .carousel-caption  {
         top:10%;
@@ -191,10 +224,15 @@ footer {
     #largeBanner{
         display:block;
     }
+    #scrollBtn{
+        font-size: 1.3em;
+        right:2%;
+        bottom:3%;
+    }
 }
 @media screen and (max-width:820px){
-    
-    .homeContainer, form{
+
+     form{
         padding-left: 0;
         padding-right: 0;
         margin-left: 0;
@@ -222,6 +260,11 @@ footer {
         padding-left: 0;
         padding-right: 0;
         margin:0;
+    }
+    #scrollBtn{
+        font-size: 1.2em;
+        right:1%;
+        bottom:3%;
     }
    
     
@@ -277,7 +320,12 @@ footer {
         margin-right: auto;
         font-size: 1.8em;
         
-}
+    }
+    #scrollBtn{
+        font-size: 1.1em;
+        right:0%;
+        bottom:2%;
+    }
     
 }
 @media screen and (max-width:576px){
@@ -323,7 +371,12 @@ footer {
         margin-right: auto;
         font-size: 1.8em;
         
-}
+    }
+    #scrollBtn{
+        font-size: 1.1em;
+        right:0%;
+        bottom:2%;
+    }
 }
 
 

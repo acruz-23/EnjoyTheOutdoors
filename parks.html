@@ -45,25 +45,25 @@
       </nav>
     </header>
     <main>
-      <div class="card banner" id="smallBanner">
-        <img
-          class="card-img"
-          src="./images/parksBannerResizeSm.jpg"
-          alt="Park in California."
-        />
-      </div>
-      <div class="card banner" id="largeBanner">
-        <img
-          class="card-img"
-          src="./images/parksBannerResizedLrg.jpg"
-          alt="Park in California."
-        />
-      </div>
-      <div class="container-fluid">
+      <div class="container-fluid container-xl g-0">
+        <div class="card banner" id="smallBanner">
+          <img
+            class="card-img"
+            src="./images/parksBannerResizeSm.jpg"
+            alt="Park in California."
+          />
+        </div>
+        <div class="card banner" id="largeBanner">
+          <img
+            class="card-img"
+            src="./images/parksBannerResizedLrg.jpg"
+            alt="Park in California."
+          />
+        </div>
         <form>
           <div class="row">
             <h1>Park Search</h1>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="locationDropdown" class="form-label"
                 >Filter by State:</label
               >
@@ -72,7 +72,7 @@
               </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="parkTypeDropdown" class="form-label"
                 >Filter by Park Type:</label
               >
@@ -82,7 +82,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 mx-auto">
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -97,7 +97,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12" id="parkTablecontainer">
+            <div class="col-12 mx-auto" id="parkTablecontainer">
               <h3 id="searchMessageEl"></h3>
               <table
                 class="table table-responsive-sm table-striped"
@@ -114,6 +114,7 @@
               </table>
             </div>
           </div>
+          <button type="button" class="btn" id="scrollBtn">Go to Top</button>
         </form>
       </div>
     </main>

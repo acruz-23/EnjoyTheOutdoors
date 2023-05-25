@@ -45,25 +45,48 @@
       </nav>
     </header>
     <main>
-      <div
-        id="carousel"
-        class="carousel slide d-none d-sm-block banner"
-        data-bs-ride="carousel"
-      >
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <video autoplay muted loop>
-              <source src="./video/GoProHomeVideo3.mp4" type="video/mp4" />
-            </video>
-            <div class="carousel-caption d-none d-sm-block videoOverlay"></div>
-            <div class="carousel-caption d-none d-sm-block">
-              <img
-                src="./images/WhiteLogoSmall.webp"
-                alt="Discover logo, white."
-              />
-              <p>YOUR NEXT ADVENTURE</p>
+      <div class="container-fluid container-xl g-0">
+        <div
+          id="carousel"
+          class="carousel slide d-none d-sm-block banner"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <video autoplay muted loop>
+                <source src="./video/GoProHomeVideo3.mp4" type="video/mp4" />
+              </video>
+              <div
+                class="carousel-caption d-none d-sm-block videoOverlay"
+              ></div>
+              <div class="carousel-caption d-none d-sm-block">
+                <img
+                  src="./images/WhiteLogoSmall.webp"
+                  alt="Discover logo, white."
+                />
+                <p>YOUR NEXT ADVENTURE</p>
+              </div>
+              <div class="carousel-caption buttonContainer d-none d-sm-block">
+                <a class="btn" href="./parks.html"> Park Search </a>
+                <a class="btn" href="./mountains.html"> Mountain Viewer </a>
+                <a class="btn" href="https://gopro.com/en/us" target="_blank">
+                  GoPro
+                </a>
+              </div>
             </div>
-            <div class="carousel-caption buttonContainer d-none d-sm-block">
+          </div>
+        </div>
+        <div class="card text-white banner" id="homeBanner">
+          <img
+            class="card-img"
+            src="./images/homeBannerResizedLg.jpg"
+            alt="Park in California."
+          />
+          <div class="card-img-overlay">
+            <div class="smallScreenTitle">
+              <p>Discover Your Next Adventure</p>
+            </div>
+            <div class="smallScreenBtns">
               <a class="btn" href="./parks.html"> Park Search </a>
               <a class="btn" href="./mountains.html"> Mountain Viewer </a>
               <a class="btn" href="https://gopro.com/en/us" target="_blank">
@@ -72,85 +95,45 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="card text-white banner" id="homeBanner">
-        <img
-          class="card-img"
-          src="./images/homeBannerResizedLg.jpg"
-          alt="Park in California."
-        />
-        <div class="card-img-overlay">
-          <div class="smallScreenTitle">
-            <p>Discover Your Next Adventure</p>
-          </div>
-          <div class="smallScreenBtns">
-            <a class="btn" href="./parks.html"> Park Search </a>
-            <a class="btn" href="./mountains.html"> Mountain Viewer </a>
-            <a class="btn" href="https://gopro.com/en/us" target="_blank">
-              GoPro
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="container-fluid">
         <div class="row">
           <div class="animalPicTitle" style="background-color: teal">
             <span>Trending Wildlife Photos </span>
             <a class="btn text-right" id="changeAnimalBtn">SHOW ME MORE!!!</a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-3">
+        <div class="row animalImgGroups">
+          <div class="col-sm-6 col-lg-4">
             <div class="card animalCard text-white">
               <img src="..." class="card-img" alt="..." id="animalImg1" />
-              <div class="card-img-overlay">
-                <h5 class="card-title" id="animalTitle1">Card title1</h5>
-              </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-6 col-lg-4">
             <div class="card animalCard text-white">
               <img src="..." class="card-img" alt="..." id="animalImg2" />
-              <div class="card-img-overlay">
-                <h5 class="card-title" id="animalTitle2">Card title2</h5>
-              </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-6 col-lg-4">
             <div class="card animalCard text-white">
               <img src="..." class="card-img" alt="..." id="animalImg3" />
-              <div class="card-img-overlay">
-                <h5 class="card-title" id="animalTitle3">Card title3</h5>
-              </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-6 col-lg-4">
             <div class="card animalCard text-white">
-              <img src="..." class="card-img" alt="..." id="animalImg4" />
-              <div class="card-img-overlay">
-                <h5 class="card-title" id="animalTitle4">Card title3</h5>
-              </div>
+              <img src="..." class="card-img" alt="..." />
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="card animalCard text-white">
+              <img src="..." class="card-img" alt="..." />
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="card animalCard text-white">
+              <img src="..." class="card-img" alt="..." />
             </div>
           </div>
         </div>
-        <div class="row">
-          <p style="background-color: #6b9a47">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint
-            consequuntur quas necessitatibus hic molestias vero facere, error
-            quo ipsam? Doloribus voluptate corporis a quaerat, ex vel mollitia
-            voluptatibus illum officiis!
-          </p>
-          <p style="background-color: #eed5b5">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint
-            consequuntur quas necessitatibus hic molestias vero facere, error
-            quo ipsam? Doloribus voluptate corporis a quaerat, ex vel mollitia
-            voluptatibus illum officiis! Lorem, ipsum dolor sit amet consectetur
-            adipisicing elit. Nostrum iste rem velit consectetur aliquam sit, in
-            consequuntur labore explicabo molestias tempora doloremque est
-            temporibus itaque assumenda animi, eaque debitis error.
-          </p>
-        </div>
-      </div>
+        
     </main>
     <footer class="mt-4 mx-3">
       <p>@DISCOVER. All rights reserved.</p>

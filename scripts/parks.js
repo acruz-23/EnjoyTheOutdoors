@@ -5,12 +5,14 @@ const parkTypeDropdownEl = document.getElementById("parkTypeDropdown");
 const tableBody = document.querySelector("tbody");
 const viewAllCheckEl = document.getElementById("viewAllCheck");
 const searchMessageEl = document.getElementById("searchMessageEl");
+const scrollBtnEl = document.getElementById("scrollBtn");
 let commonMatches = [];
 let locationMatches = [];
 let typeMatches = [];
 
 populateDropdown(parkTypesArray.sort(), parkTypeDropdownEl);
 populateDropdown(locationsArray, locationDropdownEl);
+window.onscroll = () => (scrollBtnEl.style.display = "flex");
 
 locationDropdownEl.addEventListener("change", () => {
   const selectedLocation = locationDropdownEl.value;
@@ -61,14 +63,14 @@ parkTypeDropdownEl.addEventListener("change", () => {
 });
 
 viewAllCheckEl.addEventListener("change", () => {
+  locationDropdownEl.value = "choose";
+  parkTypeDropdownEl.value = "choose";
+  typeMatches = [];
+  locationMatches = [];
   if (viewAllCheckEl.checked) {
-    locationDropdownEl.value = "choose";
-    parkTypeDropdownEl.value = "choose";
     formReset(parksTableEl, tableBody);
     nationalParksArray.forEach((park) => generateTableRow(tableBody, park));
   } else {
-    typeMatches = [];
-    locationMatches = [];
     formReset(parksTableEl, tableBody, "choose", commonMatches);
   }
 });
@@ -145,3 +147,10 @@ function formReset(table, tBody, selectedValue, matchingArray, checkBoolean) {
     table.style.display = "table-header-group";
   }
 }
+
+scrollBtnEl.addEventListener("click", () => {
+  window.scrollTo(0, 0); //https://stackoverflow.com/questions/20597258/scroll-to-the-top-of-the-page-without-refreshing-reloading-of-that-page
+  setTimeout(() => {
+    scrollBtnEl.style.display = "none";
+  }, "750");
+});
