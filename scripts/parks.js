@@ -22,15 +22,20 @@ locationDropdownEl.addEventListener("change", () => {
     selectedLocation,
     "State"
   );
-  if (typeMatches.length !== 0 && selectedLocation !== "choose") {
+  console.log(locationMatches);
+  console.log(typeMatches);
+  if (locationMatches.length === 0 && selectedLocation !== "choose") {
+    parksTableEl.style.display = "none";
+    searchMessageEl.textContent = "No Matches Found";
+  } else if (typeMatches.length !== 0 && selectedLocation !== "choose") {
     commonMatches = locationMatches.filter((parkLoc) =>
       typeMatches.includes(parkLoc)
     );
-    commonMatches.forEach((park) => generateTableRow(tableBody, park));
     if (commonMatches.length === 0) {
       parksTableEl.style.display = "none";
       searchMessageEl.textContent = "No Matches Found";
     }
+    commonMatches.forEach((park) => generateTableRow(tableBody, park));
   } else if (selectedLocation === "choose") {
     typeMatches.forEach((park) => generateTableRow(tableBody, park));
   } else {
@@ -46,7 +51,12 @@ parkTypeDropdownEl.addEventListener("change", () => {
     selectedType,
     "LocationName"
   );
-  if (locationMatches.length !== 0 && selectedType !== "choose") {
+  console.log(locationMatches);
+  console.log(typeMatches);
+  if (typeMatches.length === 0 && selectedType !== "choose") {
+    parksTableEl.style.display = "none";
+    searchMessageEl.textContent = "No Matches Found";
+  } else if (locationMatches.length !== 0 && selectedType !== "choose") {
     commonMatches = typeMatches.filter((parkType) =>
       locationMatches.includes(parkType)
     );

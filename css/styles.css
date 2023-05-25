@@ -3,6 +3,9 @@ body{
     background-color:#f8eee1;
     
 }
+.parkTablecontainer table{
+    width:100%;
+}
 #homeBanner {
     margin-bottom: 2em;
 }
