@@ -7,8 +7,6 @@ Capstone 2. Dynamically display information depending on a user's form selection
 Looping, muted, video used as a banner, with a section below displaying randomly fetched wildlife images.
 
 ![Home Page](./images/homePageScreenshot.png "Home page")
-![Parks Page](./images/parkSearchScreenshot.png "Parks page")
-![Mountains Page](./images/mountainSearchScreenshot.png "Mountains page")
 
 ### Home Page's Random Image Generator
 
@@ -40,6 +38,8 @@ function populateCard(cardEl, imgArray) {
 ## Parks Search Page
 
 A still image used as a banner up top. Below are two dropdowns to filter search and a view all parks checkbox.
+
+![Parks Page](./images/parkSearchScreenshot.png "Parks page")
 
 ### Parks Page Search
 
@@ -88,6 +88,8 @@ When the view all checkbox is clicked the form is reset and the arrays are clear
 ## Mountains Page
 
 This page contains a banner image and a single dropdown with mountain names.
+
+![Mountains Page](./images/mountainSearchScreenshot.png "Mountains page")
 
 ### Mountains Page Viewer
 
