@@ -15,69 +15,61 @@ populateDropdown(locationsArray, locationDropdownEl);
 window.onscroll = () => (scrollBtnEl.style.display = "flex");
 
 locationDropdownEl.addEventListener("change", () => {
+  const selectedType = parkTypeDropdownEl.value;
   const selectedLocation = locationDropdownEl.value;
-  formReset(parksTableEl, tableBody, selectedLocation, typeMatches, false);
+  if (
+    formReset(parksTableEl, tableBody, selectedLocation, selectedType, false)
+  ) {
+    return;
+  }
   locationMatches = matchArrayObjects(
     nationalParksArray,
     selectedLocation,
     "State"
   );
-  console.log(locationMatches);
-  console.log(typeMatches);
-  if (locationMatches.length === 0 && selectedLocation !== "choose") {
-    parksTableEl.style.display = "none";
-    searchMessageEl.textContent = "No Matches Found";
-  } else if (typeMatches.length !== 0 && selectedLocation !== "choose") {
-    commonMatches = locationMatches.filter((parkLoc) =>
-      typeMatches.includes(parkLoc)
-    );
-    if (commonMatches.length === 0) {
-      parksTableEl.style.display = "none";
-      searchMessageEl.textContent = "No Matches Found";
-    }
-    commonMatches.forEach((park) => generateTableRow(tableBody, park));
-  } else if (selectedLocation === "choose") {
-    if (typeMatches.length === "0") {
-      parksTableEl.style.display = "none";
-      searchMessageEl.textContent = "No Matches Found";
-    }
-    typeMatches.forEach((park) => generateTableRow(tableBody, park));
-  } else {
-    locationMatches.forEach((park) => generateTableRow(tableBody, park));
-  }
+  filterSearch(locationMatches, typeMatches, selectedLocation, selectedType);
+  console.log(selectedLocation);
+  console.log("locationMatches", locationMatches.length);
+  console.log("typeMatches", typeMatches.length);
+  // if (locationMatches.length === 0 && selectedLocation !== "choose") {
+  //   parksTableEl.style.display = "none";
+  //   searchMessageEl.textContent = "No Matches Found";
+  // } else if (typeMatches.length !== 0 && selectedLocation !== "choose") {
+  //   commonMatches = locationMatches.filter((parkLoc) =>
+  //     typeMatches.includes(parkLoc)
+  //   );
+  //   if (commonMatches.length === 0) {
+  //     parksTableEl.style.display = "none";
+  //     searchMessageEl.textContent = "No Matches Found";
+  //   }
+  //   commonMatches.forEach((park) => generateTableRow(tableBody, park));
+  // } else if (selectedLocation === "choose") {
+  //   if (typeMatches.length === "0") {
+  //     parksTableEl.style.display = "none";
+  //     searchMessageEl.textContent = "No Matches Found";
+  //   }
+  //   typeMatches.forEach((park) => generateTableRow(tableBody, park));
+  // } else {
+  //   locationMatches.forEach((park) => generateTableRow(tableBody, park));
+  // }
 });
 
 parkTypeDropdownEl.addEventListener("change", () => {
   const selectedType = parkTypeDropdownEl.value;
-  formReset(parksTableEl, tableBody, selectedType, locationMatches, false);
+  const selectedLocation = locationDropdownEl.value;
+  if (
+    formReset(parksTableEl, tableBody, selectedType, selectedLocation, false)
+  ) {
+    return;
+  }
   typeMatches = findInArrayObjects(
     nationalParksArray,
     selectedType,
     "LocationName"
   );
-  console.log(locationMatches);
-  console.log(typeMatches);
-  if (typeMatches.length === 0 && selectedType !== "choose") {
-    parksTableEl.style.display = "none";
-    searchMessageEl.textContent = "No Matches Found";
-  } else if (locationMatches.length !== 0 && selectedType !== "choose") {
-    commonMatches = typeMatches.filter((parkType) =>
-      locationMatches.includes(parkType)
-    );
-    commonMatches.forEach((park) => generateTableRow(tableBody, park));
-    if (commonMatches.length === 0) {
-      parksTableEl.style.display = "none";
-      searchMessageEl.textContent = "No Matches Found";
-    }
-  } else if (selectedType === "choose") {
-    if (locationMatches.length === "0") {
-      parksTableEl.style.display = "none";
-      searchMessageEl.textContent = "No Matches Found";
-    }
-    locationMatches.forEach((park) => generateTableRow(tableBody, park));
-  } else {
-    typeMatches.forEach((park) => generateTableRow(tableBody, park));
-  }
+  filterSearch(typeMatches, locationMatches, selectedType, selectedLocation);
+  console.log("locationMatches", locationMatches.length);
+  console.log("typeMatches", typeMatches.length);
 });
 
 viewAllCheckEl.addEventListener("change", () => {
@@ -89,9 +81,44 @@ viewAllCheckEl.addEventListener("change", () => {
     formReset(parksTableEl, tableBody);
     nationalParksArray.forEach((park) => generateTableRow(tableBody, park));
   } else {
-    formReset(parksTableEl, tableBody, "choose", commonMatches);
+    formReset(parksTableEl, tableBody, "choose", "choose");
   }
 });
+
+function filterSearch(
+  currentArray,
+  otherArray,
+  currentSelection,
+  otherSelection
+) {
+  if (currentArray.length === 0) {
+    if (currentSelection !== "choose") {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    } else if (otherArray.length === 0) {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    } else {
+      otherArray.forEach((park) => generateTableRow(tableBody, park));
+    }
+  } else if (otherArray.length === 0) {
+    if (otherSelection !== "choose") {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    } else {
+      currentArray.forEach((park) => generateTableRow(tableBody, park));
+    }
+  } else {
+    commonMatches = currentArray.filter((parkLoc) =>
+      otherArray.includes(parkLoc)
+    );
+    if (commonMatches.length === 0) {
+      parksTableEl.style.display = "none";
+      searchMessageEl.textContent = "No Matches Found";
+    }
+    commonMatches.forEach((park) => generateTableRow(tableBody, park));
+  }
+}
 
 function populateDropdown(data, dropdownEl) {
   data.forEach((entry) => {
@@ -152,17 +179,19 @@ Fax: ${obj.Fax}
     contactCell.appendChild(paragraph);
   }
 }
-function formReset(table, tBody, selectedValue, matchingArray, checkBoolean) {
+function formReset(table, tBody, selectedValue, otherValue, checkBoolean) {
   if (checkBoolean === false) {
     viewAllCheckEl.checked = false;
   }
   searchMessageEl.textContent = null;
   commonMatches = [];
   tBody.innerHTML = "";
-  if (selectedValue === "choose" && matchingArray.length === 0) {
+  if (selectedValue === "choose" && otherValue === "choose") {
     table.style.display = "none";
+    return true;
   } else {
     table.style.display = "table-header-group";
+    return false;
   }
 }
 

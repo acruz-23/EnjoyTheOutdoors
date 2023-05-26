@@ -62,7 +62,7 @@ function generateMountainInfo(myTable, object, imgEl) {
   const sunsetCell = row6.insertCell();
   sunsetHeading.outerHTML = "<th>Sunset (UTC):</th>";
   imgEl.src = "./images/" + object.img;
-  getSunsetForMountain(
+  displayMountainSunData(
     object.coords.lat,
     object.coords.lng,
     sunsetCell,
@@ -76,7 +76,7 @@ function clearPage(table, imgEl) {
   imgEl.alt = "";
 }
 
-async function getSunsetForMountain(lat, lng, sunsetEl, sunriseEl) {
+async function displayMountainSunData(lat, lng, sunsetEl, sunriseEl) {
   let response = await fetch(
     `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=today`
   );
