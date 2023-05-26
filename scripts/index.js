@@ -1,39 +1,39 @@
 console.log("Js working");
 let imageFiles = [
   {
-    url: "https://loremflickr.com/320/240/sea,fish",
+    url: "https://loremflickr.com/320/240/sea,wildlife,fish",
     description: "A slippery fish. ",
   },
   {
-    url: "https://loremflickr.com/320/240/forest,rodent",
+    url: "https://loremflickr.com/320/240/forest,wildlife,rodent",
     description: "A cute rodent",
   },
   {
-    url: "https://loremflickr.com/320/240/animal,insect",
+    url: "https://loremflickr.com/320/240/forest,wildlife,insect",
     description: "A cool insect",
   },
   {
-    url: "https://loremflickr.com/320/240/amphibians",
+    url: "https://loremflickr.com/320/240/animal,wildlife,amphibians",
     description: "A neat amphibian",
   },
   {
-    url: "https://loremflickr.com/320/240/mammal,deer",
+    url: "https://loremflickr.com/320/240/forest,wildlife,deer",
     description: "A timid deer",
   },
   {
-    url: "https://loremflickr.com/320/240/avian,bird",
+    url: "https://loremflickr.com/320/240/wildlife,avian,bird",
     description: "A majestic bird",
   },
   {
-    url: "https://loremflickr.com/320/240/animal,reptile",
+    url: "https://loremflickr.com/320/240/animal,wildlife,reptile",
     description: "A fearsome reptile",
   },
   {
-    url: "https://loremflickr.com/320/240/insect,butterfly",
+    url: "https://loremflickr.com/320/240/insect,wildlife,butterfly",
     description: "Beautiful butterfly",
   },
   {
-    url: "https://loremflickr.com/320/240/mammal,bear",
+    url: "https://loremflickr.com/320/240/wildlife,mammal,bear",
     description: "BEAR!!!",
   },
 ];
