@@ -31,27 +31,6 @@ locationDropdownEl.addEventListener("change", () => {
   console.log(selectedLocation);
   console.log("locationMatches", locationMatches.length);
   console.log("typeMatches", typeMatches.length);
-  // if (locationMatches.length === 0 && selectedLocation !== "choose") {
-  //   parksTableEl.style.display = "none";
-  //   searchMessageEl.textContent = "No Matches Found";
-  // } else if (typeMatches.length !== 0 && selectedLocation !== "choose") {
-  //   commonMatches = locationMatches.filter((parkLoc) =>
-  //     typeMatches.includes(parkLoc)
-  //   );
-  //   if (commonMatches.length === 0) {
-  //     parksTableEl.style.display = "none";
-  //     searchMessageEl.textContent = "No Matches Found";
-  //   }
-  //   commonMatches.forEach((park) => generateTableRow(tableBody, park));
-  // } else if (selectedLocation === "choose") {
-  //   if (typeMatches.length === "0") {
-  //     parksTableEl.style.display = "none";
-  //     searchMessageEl.textContent = "No Matches Found";
-  //   }
-  //   typeMatches.forEach((park) => generateTableRow(tableBody, park));
-  // } else {
-  //   locationMatches.forEach((park) => generateTableRow(tableBody, park));
-  // }
 });
 
 parkTypeDropdownEl.addEventListener("change", () => {
@@ -157,6 +136,17 @@ function generateTableRow(myTable, obj) {
     addressCell.textContent = `${obj.Address}
 ${obj.City}, ${obj.State} ${obj.ZipCode}`;
   }
+  const urlBase = "https://www.google.com/maps/dir/?api=1&destination=";
+  const destination = obj.LocationName.replace(/ /g, "+"); //https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with
+  console.log(destination);
+  const dirPEl = document.createElement("p");
+  const dirAEl = document.createElement("a");
+  dirAEl.href = urlBase + destination;
+  dirAEl.innerText = "Directions";
+  dirAEl.target = "_blank";
+  dirAEl.alt = obj.LocationName + "directions link.";
+  dirPEl.appendChild(dirAEl);
+  addressCell.appendChild(dirPEl);
   if (obj.Phone === 0 && obj.Fax === 0) {
     contactCell.textContent = "N/A";
   } else if (obj.Phone === 0) {
